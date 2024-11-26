@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Incluir archivos necesarios
-include("../model/HotelesManager.php");
+include("../model/adminHoteles.php");
 include_once("../model/connectionDB.php");
 
 // Crear conexión a la base de datos

@@ -19,8 +19,7 @@ $(document).ready(function() {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Redirigir a la página admin al hacer clic en Aceptar
-                            // window.location.href = "../dashboard/";
-                            window.location.href = "../factura/";
+                            window.location.href = "../dashboard/";
                         }
                     });
                 } else {

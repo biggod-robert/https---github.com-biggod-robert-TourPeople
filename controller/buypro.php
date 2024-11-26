@@ -12,7 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 /**se verifica que exista la sesion usuario */
 if (isset($_SESSION['user_tour'])) {
-    /** si existe la sesion usuario se verofoca que tengas un usuaeio */
+    /** si existe la sesion usuario se verifica que tengas un usuario */
     if ($_SESSION['user_tour'] == '') {
         echo 0;
     } else {

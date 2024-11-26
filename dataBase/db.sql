@@ -3,7 +3,6 @@ SET foreign_key_checks = 0;
 
 -- Borrar todas las tablas si existen
 DROP TABLE IF EXISTS `tb_like_hoteles`;
-
 DROP TABLE IF EXISTS `tb_like_sitios`;
 
 DROP TABLE IF EXISTS `tb_imgHoteles`;
@@ -64,11 +63,11 @@ INSERT INTO
         `fecha_ingreso`
     )
 VALUES (
-        '12345678',
+        '1120964003',
         '1',
         'usuario',
         'admin',
-        'robermoor2003@gmail.com',
+        'robertmoor2003@gmail.com',
         '$2y$10$2j2W7jWgkvlGzNhVLa/q5.Llq4MFZMN1iQfaHn/hGuBW7XijMy7qG',
         '22',
         '2024-10-26',
@@ -130,12 +129,44 @@ CREATE TABLE `tb_imgHoteles` (
     CONSTRAINT `fk_img_Hoteles` FOREIGN KEY (`id_hotel`) REFERENCES `tb_hoteles` (`id_hotel`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+-- tabla restaurantes
+CREATE TABLE `tb_restaurantes` (
+    `id_restaurante` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(200) NOT NULL,
+    `descripcion_restaurante` varchar(10000) NOT NULL,
+    `ubi_restaurante` varchar(200) NOT NULL,
+    `enlace_reservas_rest` varchar(300) NOT NULL,
+    `foto` VARCHAR(200) NOT NULL,
+    `id_documento` int(15) NOT NULL,
+    `fecha_creacion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id_restaurante`),
+    CONSTRAINT `fk_restaurantes_user` FOREIGN KEY (`id_documento`) REFERENCES `tb_users` (`id_documento`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE `tb_imgRestaurantes` (
+    `id_img` INT AUTO_INCREMENT,
+    `img` VARCHAR(200) NOT NULL,
+    `id_restaurante` INT NOT NULL,
+    PRIMARY KEY (`id_img`),
+    CONSTRAINT `fk_img_restaurantes` FOREIGN KEY (`id_restaurante`) REFERENCES `tb_restaurantes` (`id_restaurante`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+-- Tabla de Likes para restaurantes
+CREATE TABLE `tb_like_restaurantes` (
+    `id_like` INT AUTO_INCREMENT,
+    `id_documento` INT(15) NOT NULL,
+    `id_restaurante` INT NOT NULL,
+    PRIMARY KEY (`id_like`),
+    CONSTRAINT `fk_like_rest_user` FOREIGN KEY (`id_documento`) REFERENCES `tb_users` (`id_documento`) ON DELETE CASCADE,
+    CONSTRAINT `fk_like_rest_restaurante` FOREIGN KEY (`id_restaurante`) REFERENCES `tb_restaurantes` (`id_restaurante`) ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 -- Tabla de Likes para Sitios
 CREATE TABLE `tb_like_sitios` (
     `id_like` INT AUTO_INCREMENT,
     `id_documento` INT(15) NOT NULL,
     `id_sitio` INT NOT NULL,
-    `fecha` DATE DEFAULT CURRENT_DATE,
     PRIMARY KEY (`id_like`),
     CONSTRAINT `fk_like_sitio_user` FOREIGN KEY (`id_documento`) REFERENCES `tb_users` (`id_documento`) ON DELETE CASCADE,
     CONSTRAINT `fk_like_sitio_sitio` FOREIGN KEY (`id_sitio`) REFERENCES `tb_sitios` (`id_sitio`) ON DELETE CASCADE
@@ -145,11 +176,47 @@ CREATE TABLE `tb_like_hoteles` (
     `id_like` INT AUTO_INCREMENT,
     `id_documento` INT(15) NOT NULL,
     `id_hotel` INT NOT NULL,
-    `fecha` DATE DEFAULT CURRENT_DATE,
     PRIMARY KEY (`id_like`),
     CONSTRAINT `fk_like_hotel_user` FOREIGN KEY (`id_documento`) REFERENCES `tb_users` (`id_documento`) ON DELETE CASCADE,
     CONSTRAINT `fk_like_hotel_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `tb_hoteles` (`id_hotel`) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla para guardar info de habitaciones
+CREATE TABLE tb_tipos_habitaciones (
+    id_tipo_habitacion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipo VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    precio_por_noche DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE tb_imagenes_habitaciones (
+    id_img_habitacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_tipo_habitacion INT NOT NULL,
+    img VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_tipo_habitacion) REFERENCES tb_tipos_habitaciones(id_tipo_habitacion)
+);
+
+CREATE TABLE tb_reservas (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    id_hotel INT NOT NULL,
+    id_tipo_habitacion INT NOT NULL,
+    nombre_cliente VARCHAR(255) NOT NULL,
+    fecha_entrada DATE NOT NULL,
+    fecha_salida DATE NOT NULL,
+    estado_pago ENUM('pendiente', 'pagado') DEFAULT 'pendiente',
+    FOREIGN KEY (id_hotel) REFERENCES tb_hoteles(id_hotel),
+    FOREIGN KEY (id_tipo_habitacion) REFERENCES tb_tipos_habitaciones(id_tipo_habitacion)
+);
+
+CREATE TABLE tb_comentarios (
+    id_comentario INT AUTO_INCREMENT PRIMARY KEY,
+    id_hotel INT NOT NULL,
+    id_usuario INT NOT NULL,
+    comentario TEXT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_hotel) REFERENCES tb_hoteles(id_hotel),
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
+);
 
 -- Eliminar la función buscarUsuario si existe
 DROP FUNCTION IF EXISTS `buscarUsuario`;

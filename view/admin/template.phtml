@@ -81,6 +81,18 @@
                                 <span class="hide-menu">Administrar Hoteles</span>
                             </a>
                         </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Restaurantes</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link <?php if ($seccion == 7) echo 'active'; ?>" href="../admin-restaurantes/" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
+                                <span class="hide-menu">Administrar Restaurantes</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -109,6 +121,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                     <div class="message-body">
                                         <a href="../salir/" class="btn btn-outline-primary mx-3 mt-2 d-block salir">salir</a>
+                                        <a href="../perfil-usuario/" class="btn btn-outline-primary mx-3 mt-2 d-block salir">ver mi perfil</a>
                                     </div>
                                 </div>
                             </li>
@@ -129,7 +142,7 @@
                 <!-- Footer Start -->
                 <footer>
                     <div class="py-6 px-6 text-center">
-                        <p class="mb-0 fs-4">Design and Developed by <a href="#" target="_blank" class="pe-1 text-primary text-decoration-underline">TourPeople</a></p>
+                        <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a></p>
                     </div>
                 </footer>
                 <!--Footer End -->
@@ -169,6 +182,21 @@
     if ($seccion == 2) {
     ?>
         <script src="../js/adminHoteles.js"></script>
+    <?php
+    }
+    ?>
+    <!-- scrips restaurantes -->
+    <?php
+    if ($seccion == 8) {
+    ?>
+        <script src="../js/adminRestaurantes.js"></script>
+    <?php
+    }
+    ?>
+    <?php
+    if ($seccion == 11) {
+    ?>
+        <script src="../js/perfil_usuario.js"></script>
     <?php
     }
     ?>

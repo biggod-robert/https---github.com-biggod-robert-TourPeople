@@ -41,6 +41,18 @@ class path
             case 7:
                 $result = 'homeUsers.phtml';
                 break;
+            case 8:
+                $result = 'adminRestaurantes.phtml';
+                break;
+            case 9:
+                $result = 'restaurantes.phtml';
+                break;
+            case 10:
+                $result = 'ver_restaurantes.phtml';
+                break;
+            case 11:
+                $result = 'perfilUsuario.phtml';
+                break;
             default:
                 # code...
                 break;

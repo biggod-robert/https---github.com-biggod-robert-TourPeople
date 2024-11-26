@@ -23,13 +23,13 @@ $(document).ready(function() {
                 // Define el estado del botón de like según 'like_status'
                 const likeStatus = hotel.like_status === 'activo' ? 'active' : 'none';
                 const likeButtonClass = likeStatus === 'active' ? 'btn-success' : 'btn-outline-secondary';
-                const likeText = likeStatus === 'active' ? 'Liked' : 'Like';
+                const likeText = likeStatus === 'active' ? 'no me gusta' : 'me gusta';
 
                 // Crea el HTML de cada tarjeta
                 const hotelHtml = `
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <img src="../upload/hoteles/portadas/${hotel.foto}" class="card-img-top" alt="${hotel.nombre} ${hotel.ubicacion_hotel}">
+                            <img src="../upload/hoteles/portadas/${hotel.foto}" class="card-img-top" alt="${hotel.nombre}">
                             <div class="card-body">
                                 <h5 class="card-title">${hotel.nombre}</h5>
                                 <p class="card-text">${descripcion}</p>
@@ -60,7 +60,7 @@ $(document).ready(function() {
                     url: '../controller/like_hotel.php',
                     type: 'POST',
                     data: {
-                        id: idHotel,
+                        id_hotel: idHotel,
                         like_status: newStatus
                     },
                     success: function(resp) {

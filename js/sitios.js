@@ -28,7 +28,7 @@ $(document).ready(function() {
                 const sitioHtml = `
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <img src="../upload/sitios/portadas/${sitio.foto}" class="card-img-top" alt="${sitio.nombre} ${sitio.ubi_sitio}">
+                            <img src="../upload/sitios/portadas/${sitio.foto}" class="card-img-top" alt="${sitio.nombre}">
                             <div class="card-body">
                                 <h5 class="card-title">${sitio.nombre}</h5>
                                 <p class="card-text">${descripcion}</p>
@@ -53,15 +53,17 @@ $(document).ready(function() {
                 const currentStatus = button.data('status');
                 // Determina el nuevo estado de like
                 const newStatus = currentStatus === 'active' ? 'none' : 'active';
+
                 // Envío AJAX para cambiar el estado de like
                 $.ajax({
                     url: '../controller/like_sitio.php',
                     type: 'POST',
                     data: {
-                        id: idSitio,
+                        id_sitio: idSitio,
                         like_status: newStatus
                     },
                     success: function(resp) {
+                        console.log(resp);
                         const likeCountElement = $(`#likeCount-${idSitio}`);
                         let likeCount = parseInt(likeCountElement.text());
 
