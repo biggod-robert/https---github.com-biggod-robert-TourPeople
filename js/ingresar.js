@@ -1,7 +1,1 @@
-$(document).ready(function() {
-    $('.ingresar').click(function(e) {
-        e.preventDefault();
-        // redireciono al controlador general
-        window.location.href = "../dashboard/";
-    })
-});
+$(document).ready(function(){$(".ingresar").click(function(n){n.preventDefault(),window.location.href="../dashboard/"})});

@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="../css/reservas.css">
+<div class="container">
+    <h1>Administrar Hoteles</h1>
+
+    <!-- Botón para mostrar/ocultar formulario de habitaciones -->
+    <button id="btnMostrarFormulario">Añadir Habitación</button>
+
+    <!-- Formulario para añadir habitaciones -->
+    <div id="formularioHabitacion" style="display: none;">
+        <form id="formHabitacion" enctype="multipart/form-data">
+            <label for="nombreTipo">Nombre del Tipo de Habitación:</label>
+            <input type="text" id="nombreTipo" name="nombreTipo" required>
+
+            <label for="descripcionTipo">Descripción:</label>
+            <textarea id="descripcionTipo" name="descripcionTipo" required></textarea>
+
+            <label for="precioPorNoche">Precio por Noche:</label>
+            <input type="number" id="precioPorNoche" name="precioPorNoche" required>
+
+            <label for="imgHabitacion">Imágenes de la Habitación:</label>
+            <input type="file" id="imgHabitacion" name="imgHabitacion[]" multiple required>
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <!-- Tabla para mostrar habitaciones -->
+    <h3>Habitaciones</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio por Noche</th>
+                <th>Imágenes</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaHabitaciones">
+            <!-- Las habitaciones se cargarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Tabla para mostrar reservas -->
+    <h3>Reservas</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hotel</th>
+                <th>Cliente</th>
+                <th>Fecha de Entrada</th>
+                <th>Fecha de Salida</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaReservas">
+            <!-- Las reservas se cargarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Tabla para mostrar comentarios -->
+    <h3>Comentarios</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hotel</th>
+                <th>Usuario</th>
+                <th>Comentario</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaComentarios">
+            <!-- Los comentarios se cargarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Filtro para ventas totales -->
+    <h3>Ventas Totales</h3>
+    <select id="filtroVentas">
+        <option value="dia">Día</option>
+        <option value="mes">Mes</option>
+        <option value="ano">Año</option>
+    </select>
+    <p id="ventasTotales">Ventas Totales: $0</p>
+</div>
+
+<!-- Gráficos -->
+<div class="container">
+    <h3>Estadísticas</h3>
+    <canvas id="graficoUsuariosHoteles"></canvas>
+    <canvas id="graficoUsuariosSitios"></canvas>
+    <canvas id="graficoUsuariosRestaurantes"></canvas>
+</div>

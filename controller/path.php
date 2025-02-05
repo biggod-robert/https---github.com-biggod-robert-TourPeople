@@ -53,6 +53,9 @@ class path
             case 11:
                 $result = 'perfilUsuario.phtml';
                 break;
+            case 12:
+                $result = 'admin_reservas.phtml';
+                break;
             default:
                 # code...
                 break;

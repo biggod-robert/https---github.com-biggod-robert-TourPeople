@@ -24,6 +24,7 @@ RewriteRule ^admin-restaurantes/ controller/controller.php?seccion=8 [L]
 RewriteRule ^restaurantes/ controller/controller.php?seccion=9 [L]
 RewriteRule ^detalle-restaurante/([0-9]+)/?$ controller/controller.php?seccion=10&id_noticia=$1 [L]
 RewriteRule ^perfil-usuario/ controller/controller.php?seccion=11 [L]
+RewriteRule ^admin-reservas/ controller/controller.php?seccion=12 [L]
 RewriteRule ^buypro/ view/buyPro.php [L]
 RewriteRule ^factura/ view/factura.html [L]
 

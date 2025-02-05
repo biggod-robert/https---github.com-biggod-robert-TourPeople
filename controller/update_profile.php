@@ -22,6 +22,10 @@ if (!empty($_FILES['image']['name'])) {
     $image = $_SESSION['user_tour']['imagen'];
 }
 
+// Establecer la conexión a la base de datos
+$objeto = new Connection();
+$conexion = $objeto->Conectar();
+
 $query = "UPDATE tb_users SET nombre_p = :name, apellido_p = :apellido, correo = :email, telefono = :telefono, imagen = :image WHERE id_documento = :id_documento";
 $stmt = $conexion->prepare($query);
 $stmt->bindParam(':name', $name);
@@ -41,3 +45,7 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(['error' => 'Error al actualizar el perfil']);
 }
+
+// Cerrar la conexión a la base de datos
+$conexion = null;
+

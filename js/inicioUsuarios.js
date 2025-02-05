@@ -1,127 +1,31 @@
-$.ajax({
-    url: '../controller/topLikes.php',
-    type: 'POST',
-    data: {
-        id_documento: 1 // Aquí debes poner el id_documento del usuario actual
-    },
-    success: function(resp) {
-        const data = JSON.parse(resp);
-
-        // Verificar que los datos no sean vacíos antes de procesar
-        if (data.sitios && Array.isArray(data.sitios)) {
-            const contSitios = $('#contSitios');
-            data.sitios.forEach(sitio => {
-                let descripcion = '';
-                try {
-                    const descripcionObj = JSON.parse(sitio.descripcion_sitio);
-                    descripcion = descripcionObj.ops[0].insert.trim().substring(0, 60);
-                } catch (error) {
-                    console.error("Error al parsear la descripción:", error);
-                    descripcion = sitio.descripcion_sitio.substring(0, 60);
-                }
-
-                const likeStatus = sitio.like_status === 'activo' ? 'active' : 'none';
-                const likeButtonClass = likeStatus === 'active' ? 'btn-success' : 'btn-outline-secondary';
-                const likeText = likeStatus === 'active' ? 'Liked' : 'Like';
-
-                const sitioHtml = `
+$.ajax({url:"../controller/topLikes.php",type:"POST",data:{id_documento:1},success:function(t){let s=JSON.parse(t);if(s.sitios&&Array.isArray(s.sitios)){let e=$("#contSitios");s.sitios.forEach(t=>{let s="";try{let i=JSON.parse(t.descripcion_sitio);s=i.ops[0].insert.trim().substring(0,60)}catch(a){console.error("Error al parsear la descripci\xf3n:",a),s=t.descripcion_sitio.substring(0,60)}let o="activo"===t.like_status?"active":"none",r=`
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <img src="../upload/sitios/portadas/${sitio.foto}" class="card-img-top" alt="${sitio.nombre} ${sitio.ubi_sitio}">
+                            <img src="../upload/sitios/portadas/${t.foto}" class="card-img-top" alt="${t.nombre} ${t.ubi_sitio}">
                             <div class="card-body">
-                                <h5 class="card-title">${sitio.nombre}</h5>
-                                <p class="card-text">${descripcion}</p>
-                                <a href="../detalle-sitio/${sitio.id_sitio}" class="btn btn-primary">Ver sitio</a>
-                                <button id="likeBtn-${sitio.id_sitio}" class="btn ${likeButtonClass} like-btn" data-id="${sitio.id_sitio}" data-status="${likeStatus}">
-                                    ${likeText}
+                                <h5 class="card-title">${t.nombre}</h5>
+                                <p class="card-text">${s}</p>
+                                <a href="../detalle-sitio/${t.id_sitio}" class="btn btn-primary">Ver sitio</a>
+                                <button id="likeBtn-${t.id_sitio}" class="btn ${"active"===o?"btn-success":"btn-outline-secondary"} like-btn" data-id="${t.id_sitio}" data-status="${o}">
+                                    ${"active"===o?"Liked":"Like"}
                                 </button>
-                                <p class="mt-2">Likes: <span id="likeCountsitio-${sitio.id_sitio}">${sitio.total_likes}</span></p>
+                                <p class="mt-2">Likes: <span id="likeCountsitio-${t.id_sitio}">${t.total_likes}</span></p>
                             </div>
                         </div>
                     </div>
-                `;
-                contSitios.append(sitioHtml);
-            });
-        } else {
-            console.error("No se encontraron sitios populares.");
-        }
-
-        // Procesar los hoteles
-        if (data.hoteles && Array.isArray(data.hoteles)) {
-            const contHoteles = $('#contHoteles');
-            data.hoteles.forEach(hotel => {
-                let descripcion = '';
-                try {
-                    const descripcionObj = JSON.parse(hotel.descripcion_hotel);
-                    descripcion = descripcionObj.ops[0].insert.trim().substring(0, 60);
-                } catch (error) {
-                    console.error("Error al parsear la descripción:", error);
-                    descripcion = hotel.descripcion_hotel.substring(0, 60);
-                }
-
-                const likeStatus = hotel.like_status === 'activo' ? 'active' : 'none';
-                const likeButtonClass = likeStatus === 'active' ? 'btn-success' : 'btn-outline-secondary';
-                const likeText = likeStatus === 'active' ? 'Liked' : 'Like';
-
-                const hotelHtml = `
+                `;e.append(r)})}else console.error("No se encontraron sitios populares.");if(s.hoteles&&Array.isArray(s.hoteles)){let i=$("#contHoteles");s.hoteles.forEach(t=>{let s="";try{let e=JSON.parse(t.descripcion_hotel);s=e.ops[0].insert.trim().substring(0,60)}catch(a){console.error("Error al parsear la descripci\xf3n:",a),s=t.descripcion_hotel.substring(0,60)}let o="activo"===t.like_status?"active":"none",r=`
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <img src="../upload/hoteles/portadas/${hotel.foto}" class="card-img-top" alt="${hotel.nombre} ${hotel.ubicacion_hotel}">
+                            <img src="../upload/hoteles/portadas/${t.foto}" class="card-img-top" alt="${t.nombre} ${t.ubicacion_hotel}">
                             <div class="card-body">
-                                <h5 class="card-title">${hotel.nombre}</h5>
-                                <p class="card-text">${descripcion}</p>
-                                <a href="../detalle-hotel/${hotel.id_hotel}" class="btn btn-primary">Ver hotel</a>
-                                <button id="likeBtn-${hotel.id_hotel}" class="btn ${likeButtonClass} like-btn" data-id="${hotel.id_hotel}" data-status="${likeStatus}">
-                                    ${likeText}
+                                <h5 class="card-title">${t.nombre}</h5>
+                                <p class="card-text">${s}</p>
+                                <a href="../detalle-hotel/${t.id_hotel}" class="btn btn-primary">Ver hotel</a>
+                                <button id="likeBtn-${t.id_hotel}" class="btn ${"active"===o?"btn-success":"btn-outline-secondary"} like-btn" data-id="${t.id_hotel}" data-status="${o}">
+                                    ${"active"===o?"Liked":"Like"}
                                 </button>
-                                <p class="mt-2">Likes: <span id="likeCounthotel-${hotel.id_hotel}">${hotel.total_likes}</span></p>
+                                <p class="mt-2">Likes: <span id="likeCounthotel-${t.id_hotel}">${t.total_likes}</span></p>
                             </div>
                         </div>
                     </div>
-                `;
-                contHoteles.append(hotelHtml);
-            });
-        } else {
-            console.error("No se encontraron hoteles populares.");
-        }
-
-        // Evento para los botones de like
-        $('.like-btn').on('click', function() {
-            const button = $(this);
-            const idItem = button.data('id');
-            const currentStatus = button.data('status');
-            const newStatus = currentStatus === 'active' ? 'none' : 'active';
-            const tipo = button.closest('.col-md-4').find('a').attr('href').includes('hotel') ? 'hotel' : 'sitio';
-            const url = tipo === 'hotel' ? '../controller/like_hotel.php' : '../controller/like_sitio.php';
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    id: idItem,
-                    like_status: newStatus
-                },
-                success: function(resp) {
-                    const likeCountElement = $(`#likeCount${tipo}-${idItem}`);
-                    let likeCount = parseInt(likeCountElement.text());
-
-                    if (newStatus === 'active') {
-                        button.removeClass('btn-outline-secondary').addClass('btn-success').text('Liked');
-                        likeCount++;
-                    } else {
-                        button.removeClass('btn-success').addClass('btn-outline-secondary').text('Like');
-                        likeCount--;
-                    }
-
-                    likeCountElement.text(likeCount);
-                    button.data('status', newStatus);
-                },
-                error: function(err) {
-                    console.error('Error al cambiar el estado de like:', err);
-                }
-            });
-        });
-    },
-    error: function(err) {
-        console.error('Error al cargar los datos:', err);
-    }
-});
+                `;i.append(r)})}else console.error("No se encontraron hoteles populares.");$(".like-btn").on("click",function(){let t=$(this),s=t.data("id"),e=t.data("status"),i="active"===e?"none":"active",a=t.closest(".col-md-4").find("a").attr("href").includes("hotel")?"hotel":"sitio";$.ajax({url:"hotel"===a?"../controller/like_hotel.php":"../controller/like_sitio.php",type:"POST",data:{id:s,like_status:i},success:function(e){let o=$(`#likeCount${a}-${s}`),r=parseInt(o.text());"active"===i?(t.removeClass("btn-outline-secondary").addClass("btn-success").text("Liked"),r++):(t.removeClass("btn-success").addClass("btn-outline-secondary").text("Like"),r--),o.text(r),t.data("status",i)},error:function(t){console.error("Error al cambiar el estado de like:",t)}})})},error:function(t){console.error("Error al cargar los datos:",t)}});

@@ -1,8 +1,6 @@
 <?php
-// Incluir archivos necesarios
-include("../model/connectionDB.php");
+require_once '../model/connectionDB.php';
 
-// Crear conexión a la base de datos
 $objeto = new Connection();
 $conexion = $objeto->Conectar();
 
@@ -31,4 +29,3 @@ if ($id_documento > 0) {
 
 // Cerrar la conexión a la base de datos
 $conexion = null;
-

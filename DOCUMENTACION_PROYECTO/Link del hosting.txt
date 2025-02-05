@@ -1,2 +1,9 @@
 Link del hosting:
 https://mediumorchid-dragonfly-169163.hostingersite.com/inicio/
+
+INFO DE LA BASE DE DATOS
+
+HOST; localhost
+USER; u880607471_robert
+CONTRASEÑA; Tour_2024
+BASE DE DATOS; u880607471_turismo
