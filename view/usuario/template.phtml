@@ -21,7 +21,9 @@
         <?php
     }
     ?>
-</head>
+</head>HOLA
+
+
 
 <body>
     <!-- loader -->
@@ -63,7 +65,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link <?php if ($seccion == 3 || $seccion == 4)
                                 echo 'active'; ?>"
-                                href="../inicio-usuarios/" aria-expanded="false">
+                                href="../sitios/" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
                                 </span>
@@ -217,6 +219,13 @@
         <script src="https://cdn.jsdelivr.net/npm/quill-delta-to-html"></script>
         <script src="../js/detalleHotel.js"></script>
         <?php
+    }
+    ?>
+     <?php
+    if ($seccion == 7) {
+    ?>
+        <script src="../js/inicioUsuarios.js"></script>
+    <?php
     }
     ?>
     <?php

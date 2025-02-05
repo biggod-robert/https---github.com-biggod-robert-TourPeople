@@ -320,7 +320,7 @@ class HotelesManager
                 } else {
                     // Si no se puede mover la imagen, retornar error
                     $salida = array("codigo" => 0, "mensaje" => "Error al subir la nueva imagen de portada.");
-                    return;
+                    return $salida;
                 }
             }
 
